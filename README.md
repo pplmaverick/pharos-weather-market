@@ -30,24 +30,13 @@ This project is not ported from another chain. Every design decision maps to a P
 
 ## Architecture
 
-```
-Arc Network (USDC)
-      │
-      │  Arc Bridge Kit + CCTP
-      │  burn → Circle attestation → mint
-      ▼
-Pharos Mainnet (Circle-native USDC)
-      │
-      ├── WeatherMarket.sol
-      │     ├── createMarket(city, buckets, lockTime)
-      │     ├── placeBet(marketId, bucket, amount)
-      │     ├── lockMarket(marketId)
-      │     ├── submitResult(marketId, temp)  ◄── AdminOracle only
-      │     └── claimWinnings(marketId)
-      │
-      └── AdminOracle.sol
-            └── onlyOwner submitResult(city, temp, marketId)
-                  └── calls WeatherMarket.submitResult
+```mermaid
+flowchart LR
+    A["🌐 Arc Network\n(USDC)"] -->|"Arc Bridge Kit\n+ CCTP\nburn → attest → mint"| B["🔷 Pharos Mainnet\n(Circle-native USDC)"]
+    B --> C["📄 WeatherMarket.sol"]
+    B --> D["🔮 AdminOracle.sol"]
+    D -->|"submitResult(city, temp, marketId)"| C
+    C -->|"createMarket / placeBet\nlockMarket / claimWinnings"| E["👤 User"]
 ```
 
 ---
@@ -125,6 +114,53 @@ npx hardhat run scripts/deploy-pharos.ts --network pharos
 # 6. Deploy to Pharos Mainnet
 npx hardhat run scripts/deploy-pharos-mainnet.ts --network pharosMainnet
 ```
+
+### Deployed Logs
+
+<details>
+<summary>Pharos Atlantic Testnet — deployment transcript</summary>
+
+```
+Deploying with: 0xed2B5717c9b936ecC76d75401026A99143e278F5
+
+[1/3] Deploying WeatherMarket...
+  tx: 0x44442849b444daa6aa58f03cf7a6d3abf828ccae06e5207ae43a4efc61ddad7c
+  WeatherMarket deployed: 0x072a3a0c04cf8cdcaf5b4a73a4ed4ff5a841531f
+
+[2/3] Deploying AdminOracle...
+  tx: 0x49f4fc15e0ed1d94c1262da7f90f5125dd4356698806446dc4af909ab8411502
+  AdminOracle deployed: 0xcac5b9d2817325e78090e3ce4b9c299c819cf953
+
+[3/3] Setting oracle on WeatherMarket...
+  oracle updated: 0xa9a298b3354dfd4efe0f7215ecfb7a89547aaf45d9351953a59133efb69db144
+
+✓ Deployment complete
+```
+
+</details>
+
+<details>
+<summary>Pharos Pacific Ocean Mainnet — deployment transcript</summary>
+
+```
+Deploying with: 0xed2B5717c9b936ecC76d75401026A99143e278F5
+
+[1/3] Deploying WeatherMarket...
+  tx: 0xcf4fc0e899c87cb98b3536ba162bfa7bff4833433bddba10d13fa0cff0725afa
+  WeatherMarket deployed: 0xcac5b9d2817325e78090e3ce4b9c299c819cf953
+  Gas used: 3,474,987
+
+[2/3] Deploying AdminOracle...
+  tx: 0x1bf2ac094ff1008c3794de794289829add224c3bf2944fb43bb6049fd197c582
+  AdminOracle deployed: 0xbdc53e50b1167ce1199bfad54a034f7ab1741051
+
+[3/3] Setting oracle on WeatherMarket...
+  oracle updated: 0x6803c27bcdd989baebd8c21f6b30d6b256517e082138188306a967a6c7e45291
+
+✓ Deployment complete
+```
+
+</details>
 
 ---
 
@@ -219,6 +255,18 @@ if (receipt.status === "reverted") {
 }
 ```
 
+**Mainnet gas consumption differs from testnet**
+
+Pharos mainnet WeatherMarket deployment consumed 3,474,987 gas versus ~500,000 on Atlantic testnet. Use `gas: 5_000_000n` for mainnet deployments:
+
+```typescript
+const GAS_OPTS = {
+  gas: 5_000_000n,
+  gasPrice: parseGwei("10"),
+} as const;
+// mainnet reservation: 5,000,000 × 10 gwei = 0.05 PROS
+```
+
 ---
 
 ## Stack
@@ -255,8 +303,10 @@ if (receipt.status === "reverted") {
 
 ## Developer
 
-GitHub: [pplmaverick](https://github.com/pplmaverick)
-Wallet: `0xed2B5717c9b936ecC76d75401026A99143e278F5`
+[![GitHub](https://img.shields.io/badge/GitHub-pplmaverick-181717?logo=github)](https://github.com/pplmaverick)
+[![Pharos](https://img.shields.io/badge/Pharos_Mainnet-Active_Builder-blue?logo=ethereum)](https://pharosscan.xyz/address/0xed2B5717c9b936ecC76d75401026A99143e278F5)
+
+Wallet: [`0xed2B5717c9b936ecC76d75401026A99143e278F5`](https://pharosscan.xyz/address/0xed2B5717c9b936ecC76d75401026A99143e278F5)
 
 ## License
 
