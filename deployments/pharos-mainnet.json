@@ -1,0 +1,11 @@
+{
+  "network": "Pharos Pacific Ocean Mainnet",
+  "chainId": 1672,
+  "deployedAt": "2026-05-19T09:29:52.128Z",
+  "deployer": "0xed2B5717c9b936ecC76d75401026A99143e278F5",
+  "contracts": {
+    "WeatherMarket": "0xcac5b9d2817325e78090e3ce4b9c299c819cf953",
+    "AdminOracle": "0xbdc53e50b1167ce1199bfad54a034f7ab1741051",
+    "USDC": "0xC879C018dB60520F4355C26eD1a6D572cdAC1815"
+  }
+}

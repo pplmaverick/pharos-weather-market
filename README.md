@@ -10,7 +10,7 @@ Native cross-chain weather prediction market built on Pharos — purpose-built a
 
 | Network | Contract Address |
 |---|---|
-| Pharos Mainnet (1672) | TBD |
+| Pharos Mainnet (1672) | `0xcac5b9d2817325e78090e3ce4b9c299c819cf953` |
 | Pharos Atlantic Testnet (688689) | `0x072a3a0c04cf8cdcaf5b4a73a4ed4ff5a841531f` |
 
 ---
@@ -86,8 +86,8 @@ When no bets land on the winning bucket, the 2% protocol fee is waived and all U
 
 | Contract | Address |
 |---|---|
-| WeatherMarket | TBD |
-| AdminOracle | TBD |
+| WeatherMarket | [`0xcac5b9d2817325e78090e3ce4b9c299c819cf953`](https://pharosscan.xyz/address/0xcac5b9d2817325e78090e3ce4b9c299c819cf953) |
+| AdminOracle | [`0xbdc53e50b1167ce1199bfad54a034f7ab1741051`](https://pharosscan.xyz/address/0xbdc53e50b1167ce1199bfad54a034f7ab1741051) |
 | USDC | `0xC879C018dB60520F4355C26eD1a6D572cdAC1815` |
 
 ---
