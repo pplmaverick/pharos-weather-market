@@ -27,4 +27,14 @@ export default defineConfig({
       chainId: 1672,
     },
   },
+  // Hardhat v3 verify config
+  // Note: hardhat-verify v3 dropped customChains support.
+  // Pharos mainnet (1672) verification must be done via direct API call to
+  // https://api.socialscan.io/pharos/v1/explorer/command_api/contract
+  // or through the pharosscan.xyz UI when the API is available.
+  verify: {
+    etherscan: {
+      apiKey: process.env.ETHERSCAN_API_KEY ?? "anything",
+    },
+  },
 });
