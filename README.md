@@ -4,8 +4,7 @@
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.28-purple)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-Native cross-chain weather prediction market built on Pharos — purpose-built around Arc Bridge Kit + CCTP and Circle-native USDC, not ported from another chain.
-
+Cross-chain prediction market infrastructure on Pharos | Weather as first use case | Arc Bridge Kit + CCTP | Circle-native USDC | no wrapped tokens
 **Deployed on Pharos (Pacific Ocean)**
 
 | Network | Contract Address |
