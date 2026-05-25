@@ -266,6 +266,16 @@ const GAS_OPTS = {
 // mainnet reservation: 5,000,000 × 10 gwei = 0.05 PROS
 ```
 
+**Arc Bridge Kit chain identifier for Pharos Testnet**
+
+The correct SDK chain identifier is `"Pharos_Testnet"`, not `"Pharos_Atlantic"`. The viem adapter requires a separate package:
+
+```bash
+npm install @circle-fin/adapter-viem-v2
+```
+
+Use `createViemAdapterFromPrivateKey()`, not `createViemAdapter()`. Burn TX on Arc Testnet and Mint TX on Pharos Atlantic are separate transactions — track both hashes.
+
 ---
 
 ## Stack
