@@ -20,6 +20,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@chainlink/contracts-ccip": "^1.6.4",
     "@circle-fin/adapter-viem-v2": "^1.11.1",
     "@circle-fin/app-kit": "^1.6.1",
     "@circle-fin/provider-cctp-v2": "^1.8.2",

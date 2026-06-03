@@ -25,6 +25,7 @@ export default defineConfig({
       url: "https://rpc.pharos.xyz",
       accounts: [`0x${process.env.PRIVATE_KEY}`],
       chainId: 1672,
+      gas: 5_000_000,
     },
   },
   // Hardhat v3 verify config

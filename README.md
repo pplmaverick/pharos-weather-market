@@ -77,6 +77,17 @@ When no bets land on the winning bucket, the 2% protocol fee is waived and all U
 | WeatherMarket | [`0xcac5b9d2817325e78090e3ce4b9c299c819cf953`](https://pharosscan.xyz/address/0xcac5b9d2817325e78090e3ce4b9c299c819cf953) |
 | AdminOracle | [`0xbdc53e50b1167ce1199bfad54a034f7ab1741051`](https://pharosscan.xyz/address/0xbdc53e50b1167ce1199bfad54a034f7ab1741051) |
 | USDC | `0xC879C018dB60520F4355C26eD1a6D572cdAC1815` |
+| CCIPWeatherOracle | [`0x914c40a644493b47336de847b0404e729e06c68d`](https://pharosscan.xyz/address/0x914c40a644493b47336de847b0404e729e06c68d) |
+
+### Chainlink CCIP Oracle
+
+| Item | Value |
+|---|---|
+| CCIPWeatherOracle | `0x914c40a644493b47336de847b0404e729e06c68d` |
+| CCIP Router (Pharos) | `0x4e52dD94e9BCfeFE3C78153bDfB0AB1d30687297` |
+| Chain Selector | `7801139999541420232` |
+| Supported Source Chains | Ethereum, Base, Polygon, Jovay |
+| Message Format | `abi.encode(uint256 marketId, int256 finalTemp)` |
 
 ---
 
@@ -304,9 +315,11 @@ Use `createViemAdapterFromPrivateKey()`, not `createViemAdapter()`. Burn TX on A
 - Arc Bridge Kit frontend integration for USDC onboarding from Arc
 - Multi-city support: Taipei, Tokyo, Bangkok, Seoul
 
-**⬜ M3 — Decentralized Oracle**
-- Chainlink CCIP integration for trustless, permissionless settlement
-- Remove `onlyOwner` requirement from oracle submission path
+**✅ M3 — Decentralized Oracle (completed)**
+- CCIPWeatherOracle deployed on Pharos Mainnet: `0x914c40a644493b47336de847b0404e729e06c68d`
+- Chainlink CCIP integration: accepts inbound messages from Ethereum, Base, Polygon, Jovay
+- Allowlisted sender model: `setAllowedSender(sourceChainSelector, sender, true)` gates each lane
+- Message format: `abi.encode(uint256 marketId, int256 finalTemp)` → auto-calls `WeatherMarket.submitResult`
 
 ---
 

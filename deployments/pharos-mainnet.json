@@ -6,6 +6,7 @@
   "contracts": {
     "WeatherMarket": "0xcac5b9d2817325e78090e3ce4b9c299c819cf953",
     "AdminOracle": "0xbdc53e50b1167ce1199bfad54a034f7ab1741051",
-    "USDC": "0xC879C018dB60520F4355C26eD1a6D572cdAC1815"
+    "USDC": "0xC879C018dB60520F4355C26eD1a6D572cdAC1815",
+    "CCIPWeatherOracle": "0x914c40a644493b47336de847b0404e729e06c68d"
   }
 }
