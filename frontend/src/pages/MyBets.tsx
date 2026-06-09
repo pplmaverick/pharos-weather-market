@@ -14,10 +14,10 @@ interface BetRecord {
 }
 
 const CITY_BY_MARKET_ID: Record<string, CityName> = {
-  '1': 'Taipei',
-  '3': 'Tokyo',
-  '4': 'Bangkok',
-  '5': 'Seoul',
+  '0': 'Hong Kong',
+  '1': 'Shanghai',
+  '2': 'Chicago',
+  '3': 'London',
 }
 
 function BetRow({ bet }: { bet: BetRecord }) {
@@ -135,7 +135,7 @@ export default function MyBets() {
 
         const records: BetRecord[] = logs.map((log) => {
           const args = log.args as { marketId: bigint; user: string; bucket: number; amount: bigint }
-          const cityName = CITY_BY_MARKET_ID[args.marketId.toString()] ?? 'Taipei'
+          const cityName = CITY_BY_MARKET_ID[args.marketId.toString()] ?? 'Hong Kong'
           return {
             marketId: args.marketId,
             bucket: args.bucket,
