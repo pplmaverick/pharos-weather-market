@@ -172,6 +172,17 @@ Deploying with: 0xed2B5717c9b936ecC76d75401026A99143e278F5
 
 </details>
 
+### Settlement Records
+
+**Pharos Pacific Ocean Mainnet — 2026-06-16**
+
+| Market | City | Final Temp | Winning Bucket | Status |
+|---|---|---|---|---|
+| #0 | Hong Kong | 26°C | 1 | SETTLED |
+| #1 | Shanghai | 28°C | 2 | SETTLED |
+| #2 | Chicago | 19°C | 1 | SETTLED |
+| #3 | London | 16°C | 1 | SETTLED |
+
 ---
 
 ## Contract Interface
