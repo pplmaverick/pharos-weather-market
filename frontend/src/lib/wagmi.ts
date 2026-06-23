@@ -31,12 +31,12 @@ export const CONTRACT_ADDRESS = (
 
 export const USDC_ADDRESS = '0xC879C018dB60520F4355C26eD1a6D572cdAC1815' as `0x${string}`
 
-// Market IDs on Pharos Mainnet — deployed 2026-06-09 via createPharosMarkets.ts
+// Market IDs on Pharos Mainnet — Round 2 deployed 2026-06-23 via createRound2Markets.ts
 export const CITIES = {
-  'Hong Kong': { marketId: 0n, slug: 'hong-kong' },
-  Shanghai:    { marketId: 1n, slug: 'shanghai' },
-  Chicago:     { marketId: 2n, slug: 'chicago' },
-  London:      { marketId: 3n, slug: 'london' },
+  Taipei:  { marketId: 4n, slug: 'taipei' },
+  Tokyo:   { marketId: 5n, slug: 'tokyo' },
+  Seoul:   { marketId: 7n, slug: 'seoul' },
+  Bangkok: { marketId: 8n, slug: 'bangkok' },
 } as const
 
 export type CityName = keyof typeof CITIES

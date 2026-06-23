@@ -174,7 +174,18 @@ Deploying with: 0xed2B5717c9b936ecC76d75401026A99143e278F5
 
 ### Settlement Records
 
-**Pharos Pacific Ocean Mainnet — 2026-06-16**
+**Pharos Pacific Ocean Mainnet — Round 2 (2026-06-23)**
+
+| Market | City | Buckets | Lock Time (UTC) | Target Date (UTC) | Status |
+|---|---|---|---|---|---|
+| #4 | Taipei | [30,33,36,39] | 2026-06-23 22:36 | 2026-06-24 04:36 | OPEN |
+| #5 | Tokyo | [20,23,26,29] | 2026-06-23 22:36 | 2026-06-24 04:36 | OPEN |
+| #7 | Seoul | [24,27,30,33] | 2026-06-23 22:37 | 2026-06-24 04:37 | OPEN |
+| #8 | Bangkok | [29,32,35,38] | 2026-06-23 22:37 | 2026-06-24 04:37 | OPEN |
+
+> Note: marketId #6 is a duplicate Seoul (RPC timeout on first attempt; tx landed on-chain). Excluded from frontend.
+
+**Pharos Pacific Ocean Mainnet — Round 1 (2026-06-16)**
 
 | Market | City | Final Temp | Winning Bucket | Status |
 |---|---|---|---|---|
