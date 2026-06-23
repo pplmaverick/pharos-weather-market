@@ -14,10 +14,10 @@ interface BetRecord {
 }
 
 const CITY_BY_MARKET_ID: Record<string, CityName> = {
-  '0': 'Hong Kong',
-  '1': 'Shanghai',
-  '2': 'Chicago',
-  '3': 'London',
+  '4': 'Taipei',
+  '5': 'Tokyo',
+  '7': 'Seoul',
+  '8': 'Bangkok',
 }
 
 function BetRow({ bet }: { bet: BetRecord }) {

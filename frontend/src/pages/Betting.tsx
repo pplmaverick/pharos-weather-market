@@ -156,13 +156,13 @@ function WeatherCard({ city, slug }: WeatherCardProps) {
 }
 
 export default function Betting() {
-  const [selectedCity, setSelectedCity] = useState<CityName>('Hong Kong')
+  const [selectedCity, setSelectedCity] = useState<CityName>('Taipei')
   const [betBucket, setBetBucket] = useState<number | null>(null)
 
   const city = CITIES[selectedCity]
   const { market, isLoading, refetch } = useMarket(city.marketId)
 
-  const defaultBuckets: readonly bigint[] = [25n, 28n, 31n, 34n]
+  const defaultBuckets: readonly bigint[] = [30n, 33n, 36n, 39n]
   const buckets = market?.buckets?.length ? market.buckets : defaultBuckets
 
   return (
