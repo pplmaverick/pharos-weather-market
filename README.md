@@ -174,14 +174,14 @@ Deploying with: 0xed2B5717c9b936ecC76d75401026A99143e278F5
 
 ### Settlement Records
 
-**Pharos Pacific Ocean Mainnet — Round 2 (2026-06-23)**
+**Pharos Pacific Ocean Mainnet — Round 2 (2026-06-24)**
 
-| Market | City | Buckets | Lock Time (UTC) | Target Date (UTC) | Status |
-|---|---|---|---|---|---|
-| #4 | Taipei | [30,33,36,39] | 2026-06-23 22:36 | 2026-06-24 04:36 | OPEN |
-| #5 | Tokyo | [20,23,26,29] | 2026-06-23 22:36 | 2026-06-24 04:36 | OPEN |
-| #7 | Seoul | [24,27,30,33] | 2026-06-23 22:37 | 2026-06-24 04:37 | OPEN |
-| #8 | Bangkok | [29,32,35,38] | 2026-06-23 22:37 | 2026-06-24 04:37 | OPEN |
+| Market | City | Final Temp | Buckets | Winning Bucket | noWinner | Status |
+|---|---|---|---|---|---|---|
+| #4 | Taipei | 29°C | [30,33,36,39] | 0 (< 30°C) | true | SETTLED |
+| #5 | Tokyo | 23°C | [20,23,26,29] | 1 (20–23°C) | true | SETTLED |
+| #7 | Seoul | 24°C | [24,27,30,33] | 0 (≤ 24°C) | true | SETTLED |
+| #8 | Bangkok | 32°C | [29,32,35,38] | 1 (29–32°C) | true | SETTLED |
 
 > Note: marketId #6 is a duplicate Seoul (RPC timeout on first attempt; tx landed on-chain). Excluded from frontend.
 
