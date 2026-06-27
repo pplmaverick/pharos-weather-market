@@ -11,19 +11,19 @@ export default defineConfig({
     arc: {
       type: "http",
       url: "https://rpc.testnet.arc.network",
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      accounts: [`0x${process.env.PRIVATE_KEY || "0000000000000000000000000000000000000000000000000000000000000001"}`],
       chainId: 5042002,
     },
     pharos: {
       type: "http",
       url: "https://atlantic.dplabs-internal.com",
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      accounts: [`0x${process.env.PRIVATE_KEY || "0000000000000000000000000000000000000000000000000000000000000001"}`],
       chainId: 688689,
     },
     pharosMainnet: {
       type: "http",
       url: "https://rpc.pharos.xyz",
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      accounts: [`0x${process.env.PRIVATE_KEY || "0000000000000000000000000000000000000000000000000000000000000001"}`],
       chainId: 1672,
       gas: 5_000_000,
     },
