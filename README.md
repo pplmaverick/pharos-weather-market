@@ -1,5 +1,6 @@
 # Pharos Weather Market
 
+[![CI](https://github.com/pplmaverick/pharos-weather-market/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/pplmaverick/pharos-weather-market/actions/workflows/ci.yml)
 ![Network](https://img.shields.io/badge/Pharos_Mainnet-1672-blue)
 ![Solidity](https://img.shields.io/badge/Solidity-0.8.28-purple)
 ![License](https://img.shields.io/badge/license-MIT-green)
