@@ -12,6 +12,7 @@ const navItems = [
   { path: '/my-bets', label: 'My Bets', icon: 'receipt_long' },
   { path: '/market-status', label: 'Market Status', icon: 'analytics' },
   { path: '/bridge', label: 'Bridge', icon: 'swap_horiz' },
+  { path: '/market-history', label: 'Market History', icon: 'history' },
 ]
 
 function WalletButton() {

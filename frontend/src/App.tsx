@@ -4,6 +4,7 @@ import Betting from './pages/Betting'
 import MyBets from './pages/MyBets'
 import MarketStatus from './pages/MarketStatus'
 import Bridge from './pages/Bridge'
+import MarketHistory from './pages/MarketHistory'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/my-bets" element={<MyBets />} />
         <Route path="/market-status" element={<MarketStatus />} />
         <Route path="/bridge" element={<Bridge />} />
+        <Route path="/market-history" element={<MarketHistory />} />
       </Routes>
     </Layout>
   )
