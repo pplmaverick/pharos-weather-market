@@ -356,3 +356,29 @@ Wallet: [`0xed2B5717c9b936ecC76d75401026A99143e278F5`](https://pharosscan.xyz/ad
 ## License
 
 MIT
+
+## Market History
+
+### Round 1 (Mainnet)
+| Market | City | Buckets (°C) | Result |
+|--------|------|--------------|--------|
+| #0 | Hong Kong | [25,28,31,34] | SETTLED (finalTemp: 26°C) |
+| #1 | Shanghai | [20,24,28,32] | SETTLED (finalTemp: 28°C) |
+| #2 | Chicago | [15,20,25,30] | SETTLED (finalTemp: 19°C) |
+| #3 | London | [12,16,20,24] | SETTLED (finalTemp: 16°C) |
+
+### Round 2 (Mainnet)
+| Market | City | Buckets (°C) | Result |
+|--------|------|--------------|--------|
+| #4 | Taipei | [30,33,36,39] | SETTLED (finalTemp: 29°C) |
+| #5 | Tokyo | [20,23,26,29] | SETTLED (finalTemp: 23°C) |
+| #7 | Seoul | [24,27,30,33] | SETTLED (finalTemp: 24°C) |
+| #8 | Bangkok | [29,32,35,38] | SETTLED (finalTemp: 32°C) |
+
+### Round 3 (Mainnet)
+| Market | City | Buckets (°C) | Status |
+|--------|------|--------------|--------|
+| #9 | Singapore | [28,31,34,37] | OPEN |
+| #10 | Dubai | [35,38,41,44] | OPEN |
+| #11 | Sydney | [10,13,16,19] | OPEN |
+| #12 | Paris | [16,19,22,25] | OPEN |
