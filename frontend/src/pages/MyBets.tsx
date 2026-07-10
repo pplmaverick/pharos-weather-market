@@ -1,7 +1,7 @@
 import { useAccount, usePublicClient, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 import { useEffect, useState } from 'react'
 import { formatUnits } from 'viem'
-import { CONTRACT_ADDRESS, getBucketLabel, type CityName } from '../lib/wagmi'
+import { CONTRACT_ADDRESS, getBucketLabel, getCityByMarketId } from '../lib/wagmi'
 import { WEATHER_MARKET_ABI } from '../abi'
 import { useMarket, useClaimed } from '../hooks/useMarket'
 
@@ -9,16 +9,11 @@ interface BetRecord {
   marketId: bigint
   bucket: number
   amount: bigint
-  city: CityName
+  city: string
   blockNumber: bigint
 }
 
-const CITY_BY_MARKET_ID: Record<string, CityName> = {
-  '4': 'Taipei',
-  '5': 'Tokyo',
-  '7': 'Seoul',
-  '8': 'Bangkok',
-}
+
 
 function BetRow({ bet }: { bet: BetRecord }) {
   const { market } = useMarket(bet.marketId)
@@ -135,12 +130,11 @@ export default function MyBets() {
 
         const records: BetRecord[] = logs.map((log) => {
           const args = log.args as { marketId: bigint; user: string; bucket: number; amount: bigint }
-          const cityName = CITY_BY_MARKET_ID[args.marketId.toString()] ?? 'Hong Kong'
           return {
             marketId: args.marketId,
             bucket: args.bucket,
             amount: args.amount,
-            city: cityName as CityName,
+            city: getCityByMarketId(args.marketId),
             blockNumber: log.blockNumber ?? 0n,
           }
         })
