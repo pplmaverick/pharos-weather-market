@@ -333,7 +333,7 @@ Use `createViemAdapterFromPrivateKey()`, not `createViemAdapter()`. Burn TX on A
 - 2% fee logic and no-winner refund path confirmed
 - Silent revert behavior diagnosed; gas configuration stabilized
 
-**⬜ M2 — Mainnet + CCTP Bridge**
+**✅ M2 — Mainnet + CCTP Bridge**
 - Deploy to Pharos Pacific Ocean Mainnet (Chain ID 1672)
 - Arc Bridge Kit frontend integration for USDC onboarding from Arc
 - Multi-city support: Taipei, Tokyo, Bangkok, Seoul
