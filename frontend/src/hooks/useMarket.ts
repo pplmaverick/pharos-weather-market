@@ -14,6 +14,7 @@ export interface MarketData {
   buckets: readonly bigint[]
   noWinner: boolean
   bucketTotals: bigint[]
+  isExpired: boolean
 }
 
 export interface WeatherData {
@@ -61,6 +62,9 @@ export function useMarket(marketId: bigint) {
         bucketTotals: bucketData
           ? bucketData.map((d) => (d.result as bigint | undefined) ?? 0n)
           : Array(BUCKET_COUNT).fill(0n),
+        // status stays OPEN on-chain until someone calls lockMarket(), even
+        // after lockTime passes — placeBet() would revert past that point.
+        isExpired: marketRaw[3] === 0 && Number(marketRaw[2]) <= Math.floor(Date.now() / 1000),
       }
     : null
 

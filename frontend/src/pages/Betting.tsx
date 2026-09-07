@@ -28,15 +28,16 @@ interface BucketRowProps {
   totalPool: bigint
   winningBucket: number
   status: number
+  isExpired: boolean
   onBet: (bucket: number) => void
 }
 
-function BucketRow({ index, buckets, bucketTotal, totalPool, status, winningBucket, onBet }: BucketRowProps) {
+function BucketRow({ index, buckets, bucketTotal, totalPool, status, winningBucket, isExpired, onBet }: BucketRowProps) {
   const label = getBucketLabel(buckets, index)
   const pct = totalPool > 0n ? Number((bucketTotal * 10000n) / totalPool) / 100 : 0
   const usdcAmount = formatPool(bucketTotal)
   const isWinner = status === 2 && winningBucket === index
-  const isOpen = status === 0
+  const isOpen = status === 0 && !isExpired
 
   return (
     <div
@@ -81,7 +82,7 @@ function BucketRow({ index, buckets, bucketTotal, totalPool, status, winningBuck
             disabled
             className="w-full md:w-32 py-3 text-sm border border-[rgba(255,255,255,0.1)] text-[rgba(255,255,255,0.3)] rounded-lg cursor-not-allowed"
           >
-            {status === 1 ? 'Locked' : 'Settled'}
+            {status === 1 ? 'Locked' : status === 2 ? 'Settled' : 'Locked — awaiting settlement'}
           </button>
         )}
       </div>
@@ -252,6 +253,7 @@ export default function Betting() {
                 totalPool={market.totalPool}
                 status={market.status}
                 winningBucket={market.winningBucket}
+                isExpired={market.isExpired}
                 onBet={(b) => setBetBucket(b)}
               />
             ))}
@@ -271,6 +273,7 @@ export default function Betting() {
           marketId={city.marketId}
           bucketIndex={betBucket}
           buckets={buckets}
+          lockTime={market.lockTime}
           onClose={() => setBetBucket(null)}
           onSuccess={() => {
             setBetBucket(null)

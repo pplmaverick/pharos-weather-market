@@ -8,13 +8,14 @@ interface BetModalProps {
   marketId: bigint
   bucketIndex: number
   buckets: readonly bigint[]
+  lockTime: bigint
   onClose: () => void
   onSuccess: () => void
 }
 
 type Step = 'input' | 'approving' | 'betting' | 'done' | 'error'
 
-export default function BetModal({ marketId, bucketIndex, buckets, onClose, onSuccess }: BetModalProps) {
+export default function BetModal({ marketId, bucketIndex, buckets, lockTime, onClose, onSuccess }: BetModalProps) {
   const { address } = useAccount()
   const [amount, setAmount] = useState('')
   const [step, setStep] = useState<Step>('input')
@@ -87,6 +88,11 @@ export default function BetModal({ marketId, bucketIndex, buckets, onClose, onSu
 
   function handleSubmit() {
     if (!address || amountBigInt === 0n) return
+    if (Math.floor(Date.now() / 1000) >= Number(lockTime)) {
+      setStep('error')
+      setErrorMsg('Lock time has passed — this market is awaiting settlement and can no longer accept bets.')
+      return
+    }
     if (needsApproval) {
       sendApprove()
     } else {
