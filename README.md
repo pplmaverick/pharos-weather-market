@@ -30,14 +30,9 @@ This project is not ported from another chain. Every design decision maps to a P
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    A["🌐 Arc Network\n(USDC)"] -->|"Arc Bridge Kit\n+ CCTP\nburn → attest → mint"| B["🔷 Pharos Mainnet\n(Circle-native USDC)"]
-    B --> C["📄 WeatherMarket.sol"]
-    B --> D["🔮 AdminOracle.sol"]
-    D -->|"submitResult(city, temp, marketId)"| C
-    C -->|"createMarket / placeBet\nlockMarket / claimWinnings"| E["👤 User"]
-```
+<img src="docs/architecture.svg" alt="Pharos Weather Market architecture: cross-chain USDC onboarding via Arc Bridge Kit + CCTP, bet placement, a lock step that forks into two independent oracle paths (owner-submitted or Chainlink CCIP) converging on the same guarded submitResult call, and proportional claim payout" width="680" />
+
+*Settlement has two independent paths into the same guarded `WeatherMarket.submitResult`: `AdminOracle` (Phase 1, owner-submitted) and `CCIPWeatherOracle` (Phase 2, driven by Chainlink CCIP messages from Ethereum, Base, Polygon, or Jovay).*
 
 ---
 
