@@ -31,12 +31,12 @@ export const CONTRACT_ADDRESS = (
 
 export const USDC_ADDRESS = '0xC879C018dB60520F4355C26eD1a6D572cdAC1815' as `0x${string}`
 
-// Current round (shown in Betting page)
+// Current round (shown in Betting page) — Round 4
 export const CITIES = {
-  Singapore: { marketId: 9n, slug: 'singapore' },
-  Dubai:     { marketId: 10n, slug: 'dubai' },
-  Sydney:    { marketId: 11n, slug: 'sydney' },
-  Paris:     { marketId: 12n, slug: 'paris' },
+  'New York':  { marketId: 13n, slug: 'new-york' },
+  Mumbai:      { marketId: 14n, slug: 'mumbai' },
+  Cairo:       { marketId: 15n, slug: 'cairo' },
+  'Sao Paulo': { marketId: 16n, slug: 'sao-paulo' },
 } as const
 
 export type CityName = keyof typeof CITIES
@@ -53,10 +53,14 @@ export const ALL_MARKETS: Record<number, { city: string; buckets: number[]; stat
   5:  { city: 'Tokyo',      buckets: [20,23,26,29], status: 'SETTLED', finalTemp: 23 },
   7:  { city: 'Seoul',      buckets: [24,27,30,33], status: 'SETTLED', finalTemp: 24 },
   8:  { city: 'Bangkok',    buckets: [29,32,35,38], status: 'SETTLED', finalTemp: 32 },
-  9:  { city: 'Singapore',  buckets: [28,31,34,37], status: 'OPEN' },
-  10: { city: 'Dubai',      buckets: [35,38,41,44], status: 'OPEN' },
-  11: { city: 'Sydney',     buckets: [10,13,16,19], status: 'OPEN' },
-  12: { city: 'Paris',      buckets: [16,19,22,25], status: 'OPEN' },
+  9:  { city: 'Singapore',  buckets: [28,31,34,37], status: 'SETTLED', finalTemp: 33 },
+  10: { city: 'Dubai',      buckets: [35,38,41,44], status: 'SETTLED', finalTemp: 37 },
+  11: { city: 'Sydney',     buckets: [10,13,16,19], status: 'SETTLED', finalTemp: 19 },
+  12: { city: 'Paris',      buckets: [16,19,22,25], status: 'SETTLED', finalTemp: 19 },
+  13: { city: 'New York',   buckets: [14,17,20,23], status: 'OPEN' },
+  14: { city: 'Mumbai',     buckets: [26,29,32,35], status: 'OPEN' },
+  15: { city: 'Cairo',      buckets: [21,24,27,30], status: 'OPEN' },
+  16: { city: 'Sao Paulo',  buckets: [5,8,11,14],   status: 'OPEN' },
 }
 
 export function getCityByMarketId(marketId: number | bigint): string {
