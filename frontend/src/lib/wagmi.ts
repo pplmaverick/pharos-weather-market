@@ -31,12 +31,10 @@ export const CONTRACT_ADDRESS = (
 
 export const USDC_ADDRESS = '0xC879C018dB60520F4355C26eD1a6D572cdAC1815' as `0x${string}`
 
-// Current round (shown in Betting page) — Round 4
+// Current round (shown in Betting page) — Round 5
 export const CITIES = {
-  'New York':  { marketId: 13n, slug: 'new-york' },
-  Mumbai:      { marketId: 14n, slug: 'mumbai' },
-  Cairo:       { marketId: 15n, slug: 'cairo' },
-  'Sao Paulo': { marketId: 16n, slug: 'sao-paulo' },
+  Berlin:        { marketId: 17n, slug: 'berlin' },
+  'Mexico City': { marketId: 18n, slug: 'mexico-city' },
 } as const
 
 export type CityName = keyof typeof CITIES
@@ -57,10 +55,12 @@ export const ALL_MARKETS: Record<number, { city: string; buckets: number[]; stat
   10: { city: 'Dubai',      buckets: [35,38,41,44], status: 'SETTLED', finalTemp: 37 },
   11: { city: 'Sydney',     buckets: [10,13,16,19], status: 'SETTLED', finalTemp: 19 },
   12: { city: 'Paris',      buckets: [16,19,22,25], status: 'SETTLED', finalTemp: 19 },
-  13: { city: 'New York',   buckets: [14,17,20,23], status: 'OPEN' },
-  14: { city: 'Mumbai',     buckets: [26,29,32,35], status: 'OPEN' },
-  15: { city: 'Cairo',      buckets: [21,24,27,30], status: 'OPEN' },
-  16: { city: 'Sao Paulo',  buckets: [5,8,11,14],   status: 'OPEN' },
+  13: { city: 'New York',    buckets: [14,17,20,23], status: 'SETTLED', finalTemp: 18 },
+  14: { city: 'Mumbai',      buckets: [26,29,32,35], status: 'SETTLED', finalTemp: 28 },
+  15: { city: 'Cairo',       buckets: [21,24,27,30], status: 'SETTLED', finalTemp: 26 },
+  16: { city: 'Sao Paulo',   buckets: [5,8,11,14],   status: 'SETTLED', finalTemp: 12 },
+  17: { city: 'Berlin',      buckets: [10,14,18,22], status: 'OPEN' },
+  18: { city: 'Mexico City', buckets: [14,18,22,26], status: 'OPEN' },
 }
 
 export function getCityByMarketId(marketId: number | bigint): string {
