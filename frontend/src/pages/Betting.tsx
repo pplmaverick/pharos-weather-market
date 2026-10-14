@@ -157,7 +157,7 @@ function WeatherCard({ city, slug }: WeatherCardProps) {
 }
 
 export default function Betting() {
-  const [selectedCity, setSelectedCity] = useState<CityName>('Berlin')
+  const [selectedCity, setSelectedCity] = useState<CityName>('Los Angeles')
   const [betBucket, setBetBucket] = useState<number | null>(null)
 
   const city = CITIES[selectedCity]

@@ -5,6 +5,8 @@ const rounds = [
   { label: 'Round 2', ids: [4, 5, 7, 8] },
   { label: 'Round 3', ids: [9, 10, 11, 12] },
   { label: 'Round 4', ids: [13, 14, 15, 16] },
+  { label: 'Round 5', ids: [17, 18] },
+  { label: 'Round 6', ids: [19, 20] },
 ]
 
 export default function MarketHistory() {
