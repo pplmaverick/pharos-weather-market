@@ -14,6 +14,7 @@ import {
 import { privateKeyToAccount } from "viem/accounts";
 import hre from "hardhat";
 import dotenv from "dotenv";
+import { waitReceipt } from "./lib/tx.js";
 import { readFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -70,7 +71,7 @@ async function main() {
       ...GAS_OPTS,
     });
     console.log(`    tx hash : ${hash}`);
-    const receipt = await publicClient.waitForTransactionReceipt({ hash });
+    const receipt = await waitReceipt(publicClient, hash);
 
     if (receipt.status === "reverted") {
       console.error(`    ❌ 交易 reverted！tx: ${hash}`);

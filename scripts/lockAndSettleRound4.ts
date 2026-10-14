@@ -13,6 +13,7 @@ import {
 import { privateKeyToAccount } from "viem/accounts";
 import hre from "hardhat";
 import dotenv from "dotenv";
+import { waitReceipt, pause } from "./lib/tx.js";
 
 dotenv.config();
 
@@ -35,8 +36,6 @@ const MARKETS = [
   { id: 16, city: "Sao Paulo", temp: 12n },
 ];
 
-const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
-
 async function main() {
   const pk = process.env.PRIVATE_KEY;
   if (!pk) throw new Error("PRIVATE_KEY not set");
@@ -55,7 +54,7 @@ async function main() {
   console.log("【第一輪】lockMarket()\n");
   for (let i = 0; i < MARKETS.length; i++) {
     const m = MARKETS[i];
-    if (i > 0) await sleep(5000);
+    if (i > 0) await pause();
     console.log(`▶ Market #${m.id} (${m.city}) lockMarket()...`);
     try {
       const hash = await walletClient.writeContract({
@@ -66,7 +65,7 @@ async function main() {
         gas: 100_000n,
       });
       console.log(`  tx: ${hash}`);
-      const receipt = await publicClient.waitForTransactionReceipt({ hash });
+      const receipt = await waitReceipt(publicClient, hash);
       console.log(`  ✓ status: ${receipt.status}  block: ${receipt.blockNumber}\n`);
       if (receipt.status !== "success") {
         throw new Error(`lockMarket reverted for market ${m.id}`);
@@ -82,7 +81,7 @@ async function main() {
   console.log("【第二輪】AdminOracle.submitResult()\n");
   for (let i = 0; i < MARKETS.length; i++) {
     const m = MARKETS[i];
-    if (i > 0) await sleep(5000);
+    if (i > 0) await pause();
     console.log(`▶ Market #${m.id} (${m.city}) submitResult(temp=${m.temp})...`);
     try {
       const hash = await walletClient.writeContract({
@@ -93,7 +92,7 @@ async function main() {
         gas: 150_000n,
       });
       console.log(`  tx: ${hash}`);
-      const receipt = await publicClient.waitForTransactionReceipt({ hash });
+      const receipt = await waitReceipt(publicClient, hash);
       console.log(`  ✓ status: ${receipt.status}  block: ${receipt.blockNumber}\n`);
       if (receipt.status !== "success") {
         throw new Error(`submitResult reverted for market ${m.id}`);

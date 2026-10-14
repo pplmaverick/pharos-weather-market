@@ -1,5 +1,8 @@
 /**
- * 查詢 Pharos Mainnet 上四個天氣市場的狀態
+ * 查詢 Pharos Mainnet 上所有天氣市場的狀態（讀 nextMarketId 掃全部）
+ * finalTemp / buckets 皆為整數攝氏，無 x10 編碼。
+ * 用法：npx hardhat run scripts/queryMarkets.ts
+ *      FROM=17 npx hardhat run scripts/queryMarkets.ts   # 只看 id >= 17
  */
 import {
   createPublicClient,
@@ -9,13 +12,14 @@ import {
 } from "viem";
 import hre from "hardhat";
 import dotenv from "dotenv";
+import { sleep, withRetry } from "./lib/tx.js";
 
 dotenv.config();
 
 const pharosMainnet = defineChain({
   id: 1672,
   name: "Pharos Mainnet",
-  nativeCurrency: { name: "ETH", symbol: "ETH", decimals: 18 },
+  nativeCurrency: { name: "PHRS", symbol: "PHRS", decimals: 18 },
   rpcUrls: {
     default: { http: ["https://rpc.pharos.xyz"] },
   },
@@ -32,35 +36,51 @@ async function main() {
 
   const artifact = await hre.artifacts.readArtifact("WeatherMarket");
 
-  console.log("=== Pharos Mainnet 市場狀態查詢 ===\n");
-  console.log(`合約地址: ${WEATHER_MARKET}\n`);
-
-  for (let id = 0; id <= 8; id++) {
-    const result = await publicClient.readContract({
+  const nextId = (await withRetry(() =>
+    publicClient.readContract({
       address: WEATHER_MARKET,
       abi: artifact.abi,
-      functionName: "getMarket",
-      args: [BigInt(id)],
-    }) as [string, bigint, bigint, number, bigint, bigint, number, bigint[], boolean];
+      functionName: "nextMarketId",
+    }),
+  )) as bigint;
+  const from = Number(process.env.FROM ?? 0);
+
+  console.log("=== Pharos Mainnet 市場狀態查詢 ===\n");
+  console.log(`合約地址: ${WEATHER_MARKET}`);
+  console.log(`nextMarketId: ${nextId}（共 ${nextId} 個市場）\n`);
+
+  const counts = [0, 0, 0];
+
+  for (let id = from; id < Number(nextId); id++) {
+    if (id > from) await sleep(300);
+    const result = (await withRetry(() =>
+      publicClient.readContract({
+        address: WEATHER_MARKET,
+        abi: artifact.abi,
+        functionName: "getMarket",
+        args: [BigInt(id)],
+      }),
+    )) as [string, bigint, bigint, number, bigint, bigint, number, bigint[], boolean];
 
     const [city, targetDate, lockTime, status, totalPool, finalTemp, winningBucket, buckets, noWinner] = result;
-
-    const targetDateStr = new Date(Number(targetDate) * 1000).toISOString().split("T")[0];
-    const lockTimeStr = new Date(Number(lockTime) * 1000).toLocaleString("zh-TW", { timeZone: "Asia/Taipei" });
+    counts[status]++;
 
     console.log(`--- Market #${id} ---`);
     console.log(`  city:       ${city}`);
     console.log(`  status:     ${STATUS_LABEL[status]} (${status})`);
-    console.log(`  targetDate: ${targetDateStr} (Unix: ${targetDate})`);
-    console.log(`  lockTime:   ${lockTimeStr}`);
+    console.log(`  targetDate: ${new Date(Number(targetDate) * 1000).toISOString()} (Unix: ${targetDate})`);
+    console.log(`  lockTime:   ${new Date(Number(lockTime) * 1000).toISOString()} (Unix: ${lockTime})`);
+    console.log(`  buckets:    [${buckets.join(", ")}] °C`);
     console.log(`  totalPool:  ${Number(totalPool) / 1e6} USDC`);
     if (status === 2) {
-      console.log(`  finalTemp:  ${Number(finalTemp) / 10} °C`);
+      console.log(`  finalTemp:  ${finalTemp} °C`);
       console.log(`  winning:    bucket #${winningBucket}`);
       console.log(`  noWinner:   ${noWinner}`);
     }
     console.log();
   }
+
+  console.log(`合計：OPEN=${counts[0]}  LOCKED=${counts[1]}  SETTLED=${counts[2]}`);
 }
 
 main().catch((err) => {

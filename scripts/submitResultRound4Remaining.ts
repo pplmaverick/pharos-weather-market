@@ -12,6 +12,7 @@ import {
 import { privateKeyToAccount } from "viem/accounts";
 import hre from "hardhat";
 import dotenv from "dotenv";
+import { waitReceipt, pause } from "./lib/tx.js";
 
 dotenv.config();
 
@@ -30,8 +31,6 @@ const MARKETS = [
   { id: 16, city: "Sao Paulo", temp: 12n },
 ];
 
-const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
-
 async function main() {
   const pk = process.env.PRIVATE_KEY;
   if (!pk) throw new Error("PRIVATE_KEY not set");
@@ -44,7 +43,7 @@ async function main() {
 
   for (let i = 0; i < MARKETS.length; i++) {
     const m = MARKETS[i];
-    if (i > 0) await sleep(10000);
+    if (i > 0) await pause();
     console.log(`▶ Market #${m.id} (${m.city}) submitResult(temp=${m.temp})...`);
     const hash = await walletClient.writeContract({
       address: ADMIN_ORACLE,
@@ -54,8 +53,8 @@ async function main() {
       gas: 150_000n,
     });
     console.log(`  tx: ${hash}`);
-    await sleep(3000);
-    const receipt = await publicClient.waitForTransactionReceipt({ hash });
+    await pause();
+    const receipt = await waitReceipt(publicClient, hash);
     console.log(`  ✓ status: ${receipt.status}  block: ${receipt.blockNumber}\n`);
   }
 
